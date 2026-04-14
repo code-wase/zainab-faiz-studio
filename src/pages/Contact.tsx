@@ -4,10 +4,22 @@ import AnimatedSection from "@/components/AnimatedSection";
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
 
+  const [submitted, setSubmitted] = useState(false);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const text = `Name: ${form.name}%0AEmail: ${form.email}%0ASubject: ${form.subject}%0AMessage: ${form.message}`;
-    window.open(`https://wa.me/918123338996?text=${text}`, "_blank");
+    const message = `*New Contact Form Submission*
+
+*Name:* ${form.name}
+*Email:* ${form.email}
+*Subject:* ${form.subject}
+*Message:* ${form.message}`;
+
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/918123338996?text=${encoded}`, "_blank");
+    setSubmitted(true);
+    setForm({ name: "", email: "", subject: "", message: "" });
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
@@ -29,6 +41,11 @@ const Contact = () => {
               <div className="bg-gradient-card rounded-xl p-8 gold-border">
                 <h2 className="text-2xl font-heading font-semibold mb-6">Send us a Message</h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {submitted && (
+                    <div className="p-4 bg-green-900/30 border border-green-500/30 text-green-400 rounded-lg text-sm">
+                      ✅ Thank you! Your message has been sent via WhatsApp.
+                    </div>
+                  )}
                   <div>
                     <label className="block text-sm text-muted-foreground mb-1.5">Full Name</label>
                     <input

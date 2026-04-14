@@ -1,4 +1,3 @@
-import { useState, type FormEvent } from "react";
 import { useParams, Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import { getCourseBySlug } from "@/data/courses";
@@ -6,24 +5,6 @@ import { getCourseBySlug } from "@/data/courses";
 const CourseDetail = () => {
   const { slug } = useParams();
   const course = getCourseBySlug(slug || "");
-  const [showEnroll, setShowEnroll] = useState(false);
-  const [enrollForm, setEnrollForm] = useState({ name: "", email: "", phone: "", address: "" });
-
-  const handleEnrollSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const message = [
-      `📋 *Course Enrollment Application*`,
-      ``,
-      `📚 *Course:* ${course?.title}`,
-      `⏱ *Duration:* ${course?.duration}`,
-      `👤 *Name:* ${enrollForm.name}`,
-      `📧 *Email:* ${enrollForm.email}`,
-      `📞 *Phone:* ${enrollForm.phone}`,
-      `📍 *Address:* ${enrollForm.address}`,
-    ].join("%0A");
-    window.open(`https://wa.me/918123338996?text=${encodeURIComponent(message).replace(/%250A/g, "%0A")}`, "_blank");
-    setShowEnroll(false);
-  };
 
   if (!course) {
     return (
@@ -46,7 +27,6 @@ const CourseDetail = () => {
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Course Info */}
             <AnimatedSection animation="slide-left">
               <div className="rounded-2xl overflow-hidden gold-border mb-6">
                 <img src={course.image} alt={course.title} className="w-full h-[350px] object-cover" />
@@ -81,76 +61,36 @@ const CourseDetail = () => {
                 </ul>
               </div>
 
-              <button
-                onClick={() => setShowEnroll(true)}
-                className="mt-8 px-10 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity"
+              <Link
+                to={`/enroll/${course.slug}`}
+                className="mt-8 inline-block px-10 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity"
               >
                 Enroll Now
-              </button>
+              </Link>
             </AnimatedSection>
 
-            {/* Enroll Form */}
             <AnimatedSection animation="slide-right">
               <div className="bg-gradient-card rounded-xl p-8 gold-border sticky top-24">
-                <h3 className="text-xl font-heading font-semibold mb-6 text-gold">Enroll Now</h3>
-                <form onSubmit={handleEnrollSubmit} className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5">Full Name <span className="text-primary">*</span></label>
-                    <input type="text" required value={enrollForm.name} onChange={(e) => setEnrollForm({ ...enrollForm, name: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5">Email Address <span className="text-primary">*</span></label>
-                    <input type="email" required value={enrollForm.email} onChange={(e) => setEnrollForm({ ...enrollForm, email: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5">Phone Number <span className="text-primary">*</span></label>
-                    <input type="tel" required value={enrollForm.phone} onChange={(e) => setEnrollForm({ ...enrollForm, phone: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5">Address <span className="text-primary">*</span></label>
-                    <textarea required rows={3} value={enrollForm.address} onChange={(e) => setEnrollForm({ ...enrollForm, address: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors resize-none" />
-                  </div>
-                  <button type="submit" className="w-full py-3.5 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity">
-                    Submit Application
-                  </button>
-                </form>
+                <h3 className="text-xl font-heading font-semibold mb-4 text-gold">Course Highlights</h3>
+                <div className="space-y-3">
+                  {course.features.map((f) => (
+                    <div key={f} className="flex items-center gap-3">
+                      <svg className="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-sm text-muted-foreground">{f}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  to={`/enroll/${course.slug}`}
+                  className="mt-8 block text-center py-3.5 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity"
+                >
+                  Enroll Now
+                </Link>
               </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
-
-      {/* Enroll Modal (from Enroll Now button) */}
-      {showEnroll && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setShowEnroll(false)} />
-          <div className="relative bg-card border border-border rounded-2xl w-full max-w-md p-6 md:p-8 animate-scale-in">
-            <button onClick={() => setShowEnroll(false)} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <h3 className="text-xl font-heading font-semibold mb-4 text-gold">Enroll in {course.title}</h3>
-            <form onSubmit={handleEnrollSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Full Name *</label>
-                <input type="text" required value={enrollForm.name} onChange={(e) => setEnrollForm({ ...enrollForm, name: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Email *</label>
-                <input type="email" required value={enrollForm.email} onChange={(e) => setEnrollForm({ ...enrollForm, email: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Phone *</label>
-                <input type="tel" required value={enrollForm.phone} onChange={(e) => setEnrollForm({ ...enrollForm, phone: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Address *</label>
-                <textarea required rows={2} value={enrollForm.address} onChange={(e) => setEnrollForm({ ...enrollForm, address: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary transition-colors resize-none" />
-              </div>
-              <button type="submit" className="w-full py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity">Submit Application</button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
