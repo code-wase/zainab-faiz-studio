@@ -1,13 +1,10 @@
-import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
-import BookingForm from "@/components/BookingForm";
 import { getServiceBySlug } from "@/data/services";
 
 const ServiceDetail = () => {
   const { slug } = useParams();
   const service = getServiceBySlug(slug || "");
-  const [showBooking, setShowBooking] = useState(false);
 
   if (!service) {
     return (
@@ -62,19 +59,17 @@ const ServiceDetail = () => {
                   </div>
                 )}
 
-                <button
-                  onClick={() => setShowBooking(true)}
-                  className="w-full md:w-auto px-10 py-3.5 bg-primary text-primary-foreground rounded-full font-semibold text-base hover:opacity-90 transition-opacity"
+                <Link
+                  to={`/book/${service.slug}`}
+                  className="inline-block w-full md:w-auto text-center px-10 py-3.5 bg-primary text-primary-foreground rounded-full font-semibold text-base hover:opacity-90 transition-opacity"
                 >
                   Book Now
-                </button>
+                </Link>
               </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
-
-      <BookingForm isOpen={showBooking} onClose={() => setShowBooking(false)} preSelectedService={service.title} />
     </div>
   );
 };
