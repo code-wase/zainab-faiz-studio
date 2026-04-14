@@ -41,6 +41,11 @@ const Contact = () => {
               <div className="bg-gradient-card rounded-xl p-8 gold-border">
                 <h2 className="text-2xl font-heading font-semibold mb-6">Send us a Message</h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {submitted && (
+                    <div className="p-4 bg-green-900/30 border border-green-500/30 text-green-400 rounded-lg text-sm">
+                      ✅ Thank you! Your message has been sent via WhatsApp.
+                    </div>
+                  )}
                   <div>
                     <label className="block text-sm text-muted-foreground mb-1.5">Full Name</label>
                     <input
