@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
+import BookingForm from "@/components/BookingForm";
 import heroBride from "@/assets/hero-bride.jpg";
 import makeupService from "@/assets/makeup-service.jpg";
 import mehndiService from "@/assets/mehndi-service.jpg";
@@ -16,6 +17,7 @@ const heroSlides = [heroBride, makeupService, muslimBridal];
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [typedText, setTypedText] = useState("");
+  const [showBooking, setShowBooking] = useState(false);
   const fullText = "Zainab Faiz";
 
   useEffect(() => {
@@ -39,10 +41,10 @@ const Index = () => {
   }, []);
 
   const homeServices = [
-    { image: makeupService, title: "Makeup Services", description: "Master makeup with our courses, from basics to advanced bridal and HD techniques.", price: "₹15,000" },
-    { image: mehndiService, title: "Mehndi Services", description: "Learn the art of traditional and modern mehndi with hands-on instruction.", price: "₹6,000" },
-    { image: partyMakeup, title: "Party Makeup", description: "Natural yet glamorous makeup for casual parties and high-end events.", price: "₹2,499" },
-    { image: muslimBridal, title: "Muslim Bridal Makeup", description: "Elegant Islamic wedding look with premium bridal styling.", price: "₹9,999" },
+    { image: makeupService, title: "Makeup Services", description: "Master makeup with our courses, from basics to advanced bridal and HD techniques.", price: "₹15,000", slug: "makeup-services" },
+    { image: mehndiService, title: "Mehndi Services", description: "Learn the art of traditional and modern mehndi with hands-on instruction.", price: "₹6,000", slug: "mehndi-services" },
+    { image: partyMakeup, title: "Party Makeup", description: "Natural yet glamorous makeup for casual parties and high-end events.", price: "₹2,499", slug: "party-makeup-basic" },
+    { image: muslimBridal, title: "Muslim Bridal Makeup", description: "Elegant Islamic wedding look with premium bridal styling.", price: "₹9,999", slug: "bridal-pakistani-look" },
   ];
 
   return (
@@ -61,10 +63,10 @@ const Index = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <AnimatedSection animation="fade-up">
-              <p className="text-gold text-sm md:text-base font-medium tracking-widest uppercase mb-4">Welcome to</p>
+              <p className="text-primary text-sm md:text-base font-medium tracking-widest uppercase mb-4">Welcome to</p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-4 leading-tight">
                 <span className="text-gradient-gold">{typedText}</span>
-                <span className="animate-pulse text-gold">|</span>
+                <span className="animate-pulse text-primary">|</span>
                 <br />
                 <span className="text-foreground">Makeup Studio & Academy</span>
               </h1>
@@ -75,28 +77,25 @@ const Index = () => {
                 <Link to="/services" className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity">
                   Our Services
                 </Link>
-                <a
-                  href="https://wa.me/918123338996?text=Hello%2C%20I%27d%20like%20to%20book%20an%20appointment."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3 border border-foreground/30 text-foreground rounded-full font-semibold hover:border-gold hover:text-gold transition-colors"
+                <button
+                  onClick={() => setShowBooking(true)}
+                  className="px-8 py-3 border border-foreground/30 text-foreground rounded-full font-semibold hover:border-primary hover:text-primary transition-colors"
                 >
                   Book Appointment
-                </a>
+                </button>
               </div>
-              <Link to="/about" className="inline-flex items-center gap-2 mt-6 text-sm text-muted-foreground hover:text-gold transition-colors">
+              <Link to="/about" className="inline-flex items-center gap-2 mt-6 text-sm text-muted-foreground hover:text-primary transition-colors">
                 Learn more about us <span>→</span>
               </Link>
             </AnimatedSection>
           </div>
         </div>
-        {/* Slide indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
           {heroSlides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`w-3 h-3 rounded-full transition-all ${idx === currentSlide ? "bg-gold w-8" : "bg-foreground/30"}`}
+              className={`w-3 h-3 rounded-full transition-all ${idx === currentSlide ? "bg-primary w-8" : "bg-foreground/30"}`}
             />
           ))}
         </div>
@@ -116,7 +115,7 @@ const Index = () => {
             ))}
           </div>
           <AnimatedSection className="text-center mt-10">
-            <Link to="/services" className="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium transition-colors">
+            <Link to="/services" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
               View All Services <span>→</span>
             </Link>
           </AnimatedSection>
@@ -132,7 +131,7 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="text-center mb-8">
             <AnimatedSection>
-              <p className="text-gold text-sm tracking-widest uppercase mb-2">8+ Years of Excellence</p>
+              <p className="text-primary text-sm tracking-widest uppercase mb-2">8+ Years of Excellence</p>
               <p className="text-muted-foreground">Trusted by thousands of women for premium beauty services</p>
             </AnimatedSection>
           </div>
@@ -149,12 +148,12 @@ const Index = () => {
               <ul className="space-y-2 mb-6">
                 {["Premium, high-quality beauty products", "8+ years of professional experience", "Personalized service for every client", "Global availability — we travel worldwide", "Latest techniques and trends"].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span className="w-1.5 h-1.5 bg-gold rounded-full flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <Link to="/about" className="text-gold hover:text-gold-light font-medium transition-colors inline-flex items-center gap-2">
+              <Link to="/about" className="text-primary hover:text-primary/80 font-medium transition-colors inline-flex items-center gap-2">
                 Learn More About Us <span>→</span>
               </Link>
             </AnimatedSection>
@@ -185,8 +184,8 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
-              { image: trainingClass, title: "Makeup Courses", desc: "Learn day makeup, party looks, bridal styling, and advanced makeup application techniques.", duration: "3 months", prices: { Personal: "₹8,000", Basic: "₹10,000", Advance: "₹10,000" } },
-              { image: mehndiService, title: "Mehndi Courses", desc: "Become an expert in traditional and bridal mehndi art with hands-on practice and design innovation.", duration: "3 months", prices: { Personal: "₹8,000", Basic: "₹10,000", Advance: "₹10,000" } },
+              { image: trainingClass, title: "Makeup Courses", slug: "makeup-courses", desc: "Learn day makeup, party looks, bridal styling, and advanced makeup application techniques.", duration: "3 months", prices: { Personal: "₹8,000", Basic: "₹10,000", Advance: "₹10,000" } },
+              { image: mehndiService, title: "Mehndi Courses", slug: "mehndi-courses", desc: "Become an expert in traditional and bridal mehndi art with hands-on practice and design innovation.", duration: "3 months", prices: { Personal: "₹8,000", Basic: "₹10,000", Advance: "₹10,000" } },
             ].map((course, i) => (
               <AnimatedSection key={course.title} delay={i * 200}>
                 <div className="bg-gradient-card rounded-xl overflow-hidden gold-border hover-gold-glow transition-all group">
@@ -196,7 +195,7 @@ const Index = () => {
                   <div className="p-6">
                     <h3 className="font-heading text-xl font-semibold mb-2">{course.title}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{course.desc}</p>
-                    <p className="text-xs text-gold mb-3"><strong>Duration:</strong> {course.duration}</p>
+                    <p className="text-xs text-primary mb-3"><strong>Duration:</strong> {course.duration}</p>
                     <div className="space-y-1 mb-4">
                       {Object.entries(course.prices).map(([k, v]) => (
                         <div key={k} className="flex justify-between text-xs text-muted-foreground">
@@ -204,7 +203,7 @@ const Index = () => {
                         </div>
                       ))}
                     </div>
-                    <Link to="/training" className="text-sm text-gold hover:text-gold-light transition-colors font-medium">
+                    <Link to={`/training/${course.slug}`} className="text-sm text-primary hover:text-primary/80 transition-colors font-medium">
                       Learn More →
                     </Link>
                   </div>
@@ -213,7 +212,7 @@ const Index = () => {
             ))}
           </div>
           <AnimatedSection className="text-center mt-8">
-            <Link to="/training" className="text-gold hover:text-gold-light font-medium inline-flex items-center gap-2 transition-colors">
+            <Link to="/training" className="text-primary hover:text-primary/80 font-medium inline-flex items-center gap-2 transition-colors">
               View All Courses <span>→</span>
             </Link>
           </AnimatedSection>
@@ -235,21 +234,21 @@ const Index = () => {
               Book your appointment today and treat yourself to the care you deserve. Our team of experts is ready to pamper you.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="https://wa.me/918123338996?text=Hello%2C%20I%27d%20like%20to%20book%20an%20appointment."
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setShowBooking(true)}
                 className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:opacity-90 transition-opacity"
               >
                 Book an Appointment
-              </a>
-              <Link to="/contact" className="px-8 py-3 border border-foreground/30 text-foreground rounded-full font-semibold hover:border-gold hover:text-gold transition-colors">
+              </button>
+              <Link to="/contact" className="px-8 py-3 border border-foreground/30 text-foreground rounded-full font-semibold hover:border-primary hover:text-primary transition-colors">
                 Contact Us
               </Link>
             </div>
           </AnimatedSection>
         </div>
       </section>
+
+      <BookingForm isOpen={showBooking} onClose={() => setShowBooking(false)} />
     </div>
   );
 };
