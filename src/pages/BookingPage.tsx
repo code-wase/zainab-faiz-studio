@@ -55,7 +55,7 @@ Thank you! 💖`;
 
       <section className="pb-20">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-          <AnimatedSection animation="slide-up">
+          <AnimatedSection animation="fade-up">
             <div className="bg-gradient-card rounded-xl p-6 md:p-8 gold-border">
               <Link to="/services" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gold transition-colors mb-6">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
