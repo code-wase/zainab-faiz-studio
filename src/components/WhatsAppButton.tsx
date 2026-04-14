@@ -4,7 +4,7 @@ const WhatsAppButton = () => {
       {/* Email Button */}
       <a
         href="mailto:abdulwasekhan2432@gmail.com"
-        className="w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-110 transition-transform duration-300 animate-pulse-glow"
+        className="w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/40 hover:scale-110 transition-transform duration-300 animate-pulse-glow"
         aria-label="Email Us"
       >
         <svg className="w-5 h-5 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
@@ -13,6 +13,7 @@ const WhatsAppButton = () => {
       <a
         href="tel:+918123338996"
         className="w-11 h-11 bg-[#0088cc] rounded-full flex items-center justify-center shadow-lg shadow-[#0088cc]/40 hover:scale-110 transition-transform duration-300"
+        style={{ animation: "pulse-glow-blue 2s ease-in-out infinite" }}
         aria-label="Call Us"
       >
         <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
@@ -25,6 +26,7 @@ const WhatsAppButton = () => {
         target="_blank"
         rel="noopener noreferrer"
         className="w-11 h-11 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/40 hover:scale-110 transition-transform duration-300"
+        style={{ animation: "pulse-glow-green 2s ease-in-out infinite" }}
         aria-label="Chat on WhatsApp"
       >
         <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
