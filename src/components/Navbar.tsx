@@ -22,21 +22,21 @@ const Navbar = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20 relative">
             <Link to="/" className="flex items-center gap-2 sm:gap-3">
-              <img src="/logo.jpeg" alt="Zainab Faiz Logo" className="w-12 h-12 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary/30" />
-              <div className="hidden lg:block">
-                <h1 className="font-heading text-base font-bold leading-tight">
+              <img src="/logo.jpeg" alt="Zainab Faiz Logo" className="w-14 h-14 md:w-14 md:h-14 rounded-full object-cover border-2 border-primary/30" />
+              <div className="hidden md:block">
+                <h1 className="font-heading text-base lg:text-lg font-bold leading-tight">
                   <span className="text-primary">Zainab</span><span className="text-foreground">Faiz</span>
                 </h1>
                 <p className="text-xs text-muted-foreground tracking-wider">MAKEUP STUDIO & ACADEMY</p>
               </div>
             </Link>
 
-            {/* Mobile/Tablet center brand name - hidden on lg+ */}
-            <div className="lg:hidden absolute left-1/2 -translate-x-1/2 text-center">
-              <h1 className="font-heading text-sm font-bold leading-tight">
+            {/* Mobile only center brand name */}
+            <div className="md:hidden absolute left-1/2 -translate-x-1/2 text-center">
+              <h1 className="font-heading text-base font-bold leading-tight">
                 <span className="text-primary">Zainab</span><span className="text-foreground">Faiz</span>
               </h1>
-              <p className="text-[9px] text-muted-foreground tracking-wider">MAKEUP STUDIO & ACADEMY</p>
+              <p className="text-[10px] text-muted-foreground tracking-wider">MAKEUP STUDIO & ACADEMY</p>
             </div>
 
             <div className="hidden lg:flex items-center gap-8">
