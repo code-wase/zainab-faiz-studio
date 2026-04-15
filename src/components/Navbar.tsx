@@ -21,8 +21,8 @@ const Navbar = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            <Link to="/" className="flex items-center gap-3">
-              <img src="/logo.jpeg" alt="Zainab Faiz Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary/30" />
+            <Link to="/" className="flex items-center gap-2 sm:gap-3">
+              <img src="/logo.jpeg" alt="Zainab Faiz Logo" className="w-12 h-12 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary/30" />
               <div className="hidden sm:block">
                 <h1 className="font-heading text-sm md:text-base font-bold leading-tight">
                   <span className="text-primary">Zainab</span><span className="text-foreground">Faiz</span>
@@ -30,6 +30,14 @@ const Navbar = () => {
                 <p className="text-[10px] md:text-xs text-muted-foreground tracking-wider">MAKEUP STUDIO & ACADEMY</p>
               </div>
             </Link>
+
+            {/* Mobile center brand name */}
+            <div className="sm:hidden absolute left-1/2 -translate-x-1/2 text-center">
+              <h1 className="font-heading text-sm font-bold leading-tight">
+                <span className="text-primary">Zainab</span><span className="text-foreground">Faiz</span>
+              </h1>
+              <p className="text-[9px] text-muted-foreground tracking-wider">MAKEUP STUDIO & ACADEMY</p>
+            </div>
 
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
