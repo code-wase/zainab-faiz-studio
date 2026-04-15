@@ -20,7 +20,7 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-20 relative">
             <Link to="/" className="flex items-center gap-2 sm:gap-3">
               <img src="/logo.jpeg" alt="Zainab Faiz Logo" className="w-12 h-12 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary/30" />
               <div className="hidden sm:block">
