@@ -59,6 +59,7 @@ const Footer = () => {
 
         <div className="mt-10 pt-6 border-t border-border text-center text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Zainab Faiz Makeup Studio and Academy. All rights reserved.</p>
+          <p className="mt-2">Developed By <a href="https://wase-s-digital-space.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-medium">Wase's Digital Space</a></p>
         </div>
       </div>
     </footer>
